@@ -1,0 +1,9 @@
+*.pyc
+.langchain.db
+.venv/
+.direnv/
+.devenv/
+
+# nixago: ignore-linked-files
+/.vscode/settings.json
+/.vscode/extensions.json
