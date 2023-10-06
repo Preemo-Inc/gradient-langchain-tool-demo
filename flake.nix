@@ -21,6 +21,20 @@
             "python.analysis.typeCheckingMode" = "basic";
           };
 
+          nixago.requests.".vscode/launch.json".data = {
+            configurations = [
+              {
+                name = "Python: gradient_langchain_tool_demo.py";
+                type = "python";
+                request = "launch";
+                module = "chainlit";
+                args = [ "run" "gradient_langchain_tool_demo.py" ];
+                console = "integratedTerminal";
+                justMyCode = false;
+              }
+            ];
+          };
+
           devenvShellModule = {
             languages = {
               python = {
