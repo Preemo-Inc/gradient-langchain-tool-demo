@@ -19,6 +19,7 @@
           nixago.requests.".vscode/settings.json".data = {
             "python.defaultInterpreterPath" = "./.venv/bin/python";
             "python.analysis.typeCheckingMode" = "basic";
+            "jupyter.debugJustMyCode" = false;
           };
 
           nixago.requests.".vscode/launch.json".data = {

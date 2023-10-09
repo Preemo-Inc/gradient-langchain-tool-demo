@@ -1,15 +1,14 @@
-from langchain.agents import load_tools
-from langchain.agents import initialize_agent
-from langchain.agents import AgentType
-from langchain.chat_models import ChatOpenAI
-from langchain.llms import GradientLLM
-from chainlit import user_session, langchain_factory
-
-from os import environ
+import chainlit as cl
+from chainlit import user_session
+from langchain.agents import AgentExecutor, AgentType, initialize_agent, load_tools
+from langchain.llms.gradient_ai import GradientLLM
+from langchain.memory import ConversationBufferMemory
 
 
-@langchain_factory(use_async=False)
-def factory():
+@cl.on_chat_start
+def main():
+    # Instantiate the chain for that user session
+
     env = user_session.get("env")
     assert env is not None
     llm = GradientLLM(
@@ -35,14 +34,37 @@ def factory():
         [
             "google-search-results-json",
             "llm-math",
-            # requests_all can be used to browse the link, however it would easily exceed GPT-4's context length limit.
+            # requests_all can be used to browse the link, however it would easily exceed the context length limit.
             # "requests_all"
         ],
         llm=llm,
         google_api_key=env["GOOGLE_API_KEY"],
         google_cse_id=env["GOOGLE_CSE_ID"],
     )
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+
     agent = initialize_agent(
-        tools, llm, agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True
+        tools,
+        llm,
+        agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
+        verbose=True,
+        memory=memory,
     )
-    return agent
+
+    # Store the chain in the user session
+    cl.user_session.set("agent", agent)
+
+
+@cl.on_message
+async def on_message(message: str):
+    # Retrieve the chain from the user session
+    agent = cl.user_session.get("agent")
+    assert isinstance(agent, AgentExecutor)
+
+    # Call the chain asynchronously
+    res = await agent.acall(message, callbacks=[cl.AsyncLangchainCallbackHandler()])
+
+    # Do any post processing here
+
+    # Send the response
+    await cl.Message(content=res["output"]).send()
