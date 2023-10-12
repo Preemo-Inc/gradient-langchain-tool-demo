@@ -1,3 +1,4 @@
+from textwrap import dedent
 import chainlit as cl
 from chainlit import user_session
 from langchain.agents import AgentExecutor, AgentType, initialize_agent, load_tools
@@ -30,17 +31,19 @@ def main():
     #     model="gpt-4",
     #     openai_api_key=env["OPENAI_API_KEY"],
     # )
-    tools = load_tools(
-        [
-            "google-search-results-json",
-            "llm-math",
-            # requests_all can be used to browse the link, however it would easily exceed the context length limit.
-            # "requests_all"
-        ],
-        llm=llm,
-        google_api_key=env["GOOGLE_API_KEY"],
-        google_cse_id=env["GOOGLE_CSE_ID"],
-    )
+    tools = [
+        *load_tools(
+            [
+                "memorize",
+                "google-search-results-json",
+                # requests_all can be used to browse the link, however it would easily exceed the context length limit.
+                # "requests_all"
+            ],
+            llm=llm,
+            google_api_key=env["GOOGLE_API_KEY"],
+            google_cse_id=env["GOOGLE_CSE_ID"],
+        ),
+    ]
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
     agent = initialize_agent(
@@ -49,6 +52,18 @@ def main():
         agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
         verbose=True,
         memory=memory,
+        agent_kwargs={
+            "prefix": dedent(
+                """\
+                You are an large language model named GradientBot. You are helping people with their questions. You should use tool to either find unknown information or to memorize novel information that you just observed.
+
+                TOOLS:
+                ------
+
+                You have access to the following tools:"""
+            ),
+            "ai_prefix": "GradientBot",
+        },
     )
 
     # Store the chain in the user session

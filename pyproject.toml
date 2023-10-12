@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 chainlit = "^0.7.1"
-langchain = { git = "https://github.com/Atry/langchain", branch = "quoted-tool-name", subdirectory = "libs/langchain" }
+langchain = { git = "https://github.com/Atry/langchain", branch = "main", subdirectory = "libs/langchain" }
 google-api-python-client = "^2.91.0"
 numexpr = "^2.8.7"
 
