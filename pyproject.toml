@@ -8,13 +8,14 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 chainlit = "^0.7.1"
-langchain = { git = "https://github.com/Atry/langchain", branch = "main", subdirectory = "libs/langchain" }
+langchain = "*"
 google-api-python-client = "^2.91.0"
 numexpr = "^2.8.7"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"
 autoflake = "^2.2.1"
+langchain = { path = "./langchain/libs/langchain", develop = true }
 
 [build-system]
 requires = ["poetry-core"]

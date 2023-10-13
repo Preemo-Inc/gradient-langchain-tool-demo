@@ -1290,7 +1290,7 @@ description = "Building applications with LLMs through composability"
 optional = false
 python-versions = ">=3.8.1,<4.0"
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 aiohttp = "^3.8.3"
@@ -3199,4 +3199,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f57377b707dbc6b72d612ee5702749fec4f228d4d470bba54bfd192c9875bb45"
+content-hash = "ee7f3931860005e598f43c2426678c39c3577192721f573a37fd19632031a876"

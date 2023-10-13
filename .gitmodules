@@ -1,0 +1,4 @@
+[submodule "langchain"]
+	path = langchain
+	url = https://github.com/Atry/langchain
+	branch = main
