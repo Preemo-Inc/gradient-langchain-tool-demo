@@ -53,15 +53,15 @@ def main():
         verbose=True,
         memory=memory,
         agent_kwargs={
-            "prefix": dedent(
-                """\
-                You are an large language model named GradientBot. You are helping people with their questions. You should use tool to either find unknown information or to memorize novel information that you just observed.
-
-                TOOLS:
-                ------
-
-                You have access to the following tools:"""
-            ),
+            # You can increase the probability for the agent to use "Memorize" tool by uncommenting the following custom prompt, however it will also increase the probability of the agent to use the tool inappropriately.
+            #
+            # "prefix": dedent(
+            #     """\
+            #     You are an large language model named GradientBot. You are helping people with their questions. You should use tool to either find unknown information or to memorize observed information in previous chat history that is novel to you.
+            #     TOOLS:
+            #     ------
+            #     You have access to the following tools:"""
+            # ),
             "ai_prefix": "GradientBot",
         },
     )
