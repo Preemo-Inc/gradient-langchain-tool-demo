@@ -291,17 +291,17 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1694973625,
-        "narHash": "sha256-gLiY5lzdCPReUiV8NWmKqu8y/FWXQHK361S9WF19RAo=",
-        "ref": "refs/heads/main",
-        "rev": "4f02444fdc9596171238240b84d469c87629c0bf",
-        "revCount": 195,
-        "type": "git",
-        "url": "ssh://git@github.com/Preemo-Inc/ml-ops.git"
+        "lastModified": 1697671627,
+        "narHash": "sha256-voGrj1raM9fan55pbsMW9OvHPppAlrfCwoGPH/nGb60=",
+        "owner": "Preemo-Inc",
+        "repo": "nix-ml-ops",
+        "rev": "2b0e7cda8e8a1432769dd7c37efc02c438948f0e",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/Preemo-Inc/ml-ops.git"
+        "owner": "Preemo-Inc",
+        "repo": "nix-ml-ops",
+        "type": "github"
       }
     },
     "nix": {

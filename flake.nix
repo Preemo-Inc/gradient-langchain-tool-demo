@@ -1,8 +1,6 @@
 {
   inputs = {
-    # Use git+ssh protocol because it's a private repository
-    # See https://discourse.nixos.org/t/nix-flakes-and-private-repositories/12014
-    ml-ops.url = "git+ssh://git@github.com/Preemo-Inc/ml-ops.git";
+    ml-ops.url = "github:Preemo-Inc/nix-ml-ops";
     ml-ops.inputs.systems.url = "github:nix-systems/default";
   };
   outputs = inputs @ { ml-ops, ... }:
